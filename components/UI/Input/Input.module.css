@@ -1,0 +1,44 @@
+.input {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.4rem;
+}
+
+.input label {
+	width: 100%;
+	margin-bottom: 1rem;
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.input.error label {
+	color: #e03131;
+}
+
+.input input {
+	width: 100%;
+	height: 3.4rem;
+	display: block;
+	border-radius: 150px;
+	padding: 1.4rem;
+	font-size: 1.6rem;
+	margin-bottom: 1rem;
+}
+
+.input.error input {
+	border: 3px solid #e03131;
+}
+
+.input input:focus {
+	outline: 3px solid #94d82d;
+	border: none;
+}
+
+.input.error input:focus {
+	outline: 3px solid #e03131;
+}
+
+.error-text {
+	text-align: center;
+	color: #e03131;
+}

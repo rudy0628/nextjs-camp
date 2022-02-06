@@ -1,0 +1,90 @@
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 2;
+}
+
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 3;
+	padding: 2rem;
+	width: 30vw;
+	height: 25rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: #fff;
+}
+
+.modal__header {
+	font-size: 2rem;
+	color: #5c940d;
+	text-align: center;
+}
+
+.modal__main {
+	text-align: center;
+	font-size: 1.6rem;
+}
+
+.modal__footer {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.modal__footer button {
+	padding: 0.6rem 1.2rem;
+
+	background: none;
+	border-radius: 11px;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.modal__footer button:not(:last-child) {
+	margin-right: 1rem;
+}
+
+.modal__btn--check {
+	border: 2px solid #5c940d;
+}
+
+.modal__btn--check:hover {
+	background-color: #c0eb75;
+}
+
+.modal__btn--delete {
+	border: 2px solid #c92a2a;
+}
+
+.modal__btn--delete:hover {
+	background-color: #ffa8a8;
+}
+
+/* 950px */
+@media only screen and (max-width: 59.375rem) {
+	.modal {
+		width: 50vw;
+	}
+}
+
+/* 570px */
+@media only screen and (max-width: 35.625rem) {
+	.modal {
+		width: 70vw;
+	}
+}
+
+/* 400px */
+@media only screen and (max-width: 25rem) {
+	.modal {
+		width: 85vw;
+	}
+}

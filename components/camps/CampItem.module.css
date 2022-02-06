@@ -1,0 +1,49 @@
+.camp-item {
+	margin-bottom: 2rem;
+}
+
+.camp-item__img-box img {
+	width: 100%;
+}
+
+.camp-item__text-box {
+	padding: 2rem;
+}
+
+.camp-item__title {
+	font-size: 2.4rem;
+	margin-bottom: 1rem;
+}
+
+.camp-item__location {
+	color: #666;
+	font-style: italic;
+	margin-bottom: 1rem;
+}
+
+.camp-item__price {
+	margin-bottom: 1rem;
+}
+
+.camp-item__description {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.camp-item__btn {
+	border: 3px solid #94d82d;
+	background: none;
+	padding: 0.8rem 1.6rem;
+	border-radius: 11px;
+	font-size: 1.4rem;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.camp-item__btn:not(:last-child) {
+	margin-right: 1rem;
+}
+
+.camp-item__btn:hover {
+	background-color: #94d82d;
+}

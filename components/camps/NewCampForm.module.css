@@ -1,0 +1,30 @@
+.form {
+	padding: 2rem;
+}
+
+.form button {
+	padding: 1rem 2rem;
+	font-size: 1.6rem;
+	border-radius: 11px;
+	border: none;
+	background: none;
+	border: 3px solid #94d82d;
+	display: block;
+	margin-left: auto;
+	margin-top: 2.6rem;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.form button:hover {
+	background-color: #94d82d;
+}
+
+.form button:disabled {
+	border: 3px solid #eee;
+	cursor: not-allowed;
+}
+
+.form button:disabled:hover {
+	background: none;
+}
