@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import Router from 'next/router';
 import Head from 'next/head';
+import { server } from '../config';
 
 import Spinner from '../components/UI/spinner/Spinner';
 import ErrorMessage from '../components/UI/ErrorMessage/ErrorMessage';
@@ -52,7 +53,7 @@ const HomePage = props => {
 
 export const getServerSideProps = async () => {
 	try {
-		const response = await fetch('http://127.0.0.1:3000/api/all-camp', {
+		const response = await fetch(`${server}/api/all-camp`, {
 			method: 'GET',
 		});
 

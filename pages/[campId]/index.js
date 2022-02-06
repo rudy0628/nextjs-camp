@@ -2,6 +2,7 @@ import { useState, Fragment } from 'react';
 import { render } from 'react-dom';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { server } from '../../config';
 
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import Modal from '../../components/UI/Modal/Modal';
@@ -85,7 +86,7 @@ const CampDetailPage = props => {
 };
 
 export const getStaticPaths = async () => {
-	const response = await fetch('http://127.0.0.1:3000/api/camp-id', {
+	const response = await fetch(`${server}/api/camp-id`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -108,15 +109,12 @@ export const getStaticProps = async context => {
 	try {
 		const campId = context.params.campId;
 
-		const response = await fetch(
-			`http://127.0.0.1:3000/api/camp?id=${campId}`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		);
+		const response = await fetch(`${server}/api/camp?id=${campId}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 
 		if (!response.ok) {
 			throw new Error();
