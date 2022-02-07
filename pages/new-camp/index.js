@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { render } from 'react-dom';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import Message from '../../components/UI/flashMessage/Message';

@@ -86,7 +86,7 @@ const CampDetailPage = props => {
 };
 
 export const getStaticPaths = async () => {
-	const response = await fetch(`/api/camp-id`, {
+	const response = await fetch(`${server}/api/camp-id`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export const getStaticProps = async context => {
 	try {
 		const campId = context.params.campId;
 
-		const response = await fetch(`/api/camp?id=${campId}`, {
+		const response = await fetch(`${server}/api/camp?id=${campId}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
