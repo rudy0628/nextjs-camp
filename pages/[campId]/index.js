@@ -1,8 +1,8 @@
 import { useState, Fragment } from 'react';
+import { MongoClient, ObjectId } from 'mongodb';
 import { render } from 'react-dom';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { server } from '../../config';
 
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage';
 import Modal from '../../components/UI/Modal/Modal';
@@ -85,19 +85,24 @@ const CampDetailPage = props => {
 	);
 };
 
-export const getStaticPaths = async () => {
-	const response = await fetch(`${server}/api/camp-id`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+const databaseConnect = async () => {
+	const client = await MongoClient.connect(
+		'mongodb+srv://rudy:lastcool0628@cluster0.0ro8b.mongodb.net/camps?retryWrites=true&w=majority'
+	);
+	const db = client.db();
+	const campsCollection = db.collection('camps');
 
-	const data = await response.json();
+	return { client, campsCollection };
+};
+
+export const getStaticPaths = async () => {
+	const { client, campsCollection } = await databaseConnect();
+	const camps = await campsCollection.find({}, { _id: 1 }).toArray();
+	client.close();
 
 	return {
 		fallback: false,
-		paths: data.camps.map(camp => ({
+		paths: camps.map(camp => ({
 			params: {
 				campId: camp._id.toString(),
 			},
@@ -109,29 +114,22 @@ export const getStaticProps = async context => {
 	try {
 		const campId = context.params.campId;
 
-		const response = await fetch(`${server}/api/camp?id=${campId}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+		const { client, campsCollection } = await databaseConnect();
+		const camp = await campsCollection.findOne({
+			_id: ObjectId(campId),
 		});
 
-		if (!response.ok) {
-			throw new Error();
-			return;
-		}
-
-		const data = await response.json();
+		client.close();
 
 		return {
 			props: {
 				campData: {
-					id: data.camp._id.toString(),
-					title: data.camp.title,
-					location: data.camp.location,
-					price: data.camp.price,
-					description: data.camp.description,
-					image: data.camp.image,
+					id: camp._id.toString(),
+					title: camp.title,
+					location: camp.location,
+					price: camp.price,
+					description: camp.description,
+					image: camp.image,
 				},
 				status: 'SUCCESS',
 			},

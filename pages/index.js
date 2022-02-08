@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { MongoClient } from 'mongodb';
 import Router from 'next/router';
 import Head from 'next/head';
-import { server } from '../config';
 
 import Spinner from '../components/UI/spinner/Spinner';
 import ErrorMessage from '../components/UI/ErrorMessage/ErrorMessage';
@@ -53,19 +53,17 @@ const HomePage = props => {
 
 export const getServerSideProps = async () => {
 	try {
-		const response = await fetch(`${server}/api/all-camp`, {
-			method: 'GET',
-		});
+		const client = await MongoClient.connect(
+			'mongodb+srv://rudy:lastcool0628@cluster0.0ro8b.mongodb.net/camps?retryWrites=true&w=majority'
+		);
+		const db = client.db();
+		const campsCollection = db.collection('camps');
+		const camps = await campsCollection.find().toArray();
+		client.close();
 
-		if (!response.ok) {
-			throw new Error();
-			return;
-		}
-
-		const data = await response.json();
 		return {
 			props: {
-				camps: data.camps.map(camp => ({
+				camps: camps.map(camp => ({
 					id: camp._id.toString(),
 					title: camp.title,
 					location: camp.location,

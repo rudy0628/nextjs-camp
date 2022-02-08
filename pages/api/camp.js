@@ -8,17 +8,6 @@ const handler = async (req, res) => {
 	const db = client.db();
 	const campsCollection = db.collection('camps');
 
-	if (req.method === 'GET') {
-		const { id } = req.query;
-		const camp = await campsCollection.findOne({
-			_id: ObjectId(id),
-		});
-
-		client.close();
-
-		res.status(201).json({ camp: camp, message: 'Add New Camp Successfully!' });
-	}
-
 	if (req.method === 'POST') {
 		const result = await campsCollection.insertOne(data);
 
