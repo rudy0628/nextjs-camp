@@ -95,7 +95,7 @@ export const getStaticPaths = async () => {
 	client.close();
 
 	return {
-		fallback: false,
+		fallback: 'blocking',
 		paths: camps.map(camp => ({
 			params: {
 				campId: camp._id.toString(),
