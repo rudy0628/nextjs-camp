@@ -22,3 +22,25 @@ a {
 	display: flex;
 	justify-content: center;
 }
+
+/* flash text */
+.flash-text .message {
+	text-align: center;
+	height: 4rem;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flash-text .message--success {
+	background-color: #f4fce3;
+}
+
+.flash-text .message--error {
+	background-color: #ffa8a8;
+}
+
+.flash-text .message strong {
+	font-size: 1.6rem;
+}

@@ -1,14 +1,13 @@
 import FlashMessage from 'react-flash-message';
-import classes from './Message.module.css';
 
 const Message = props => {
 	let style;
 	if (props.type === 'SUCCESS') {
-		style = `${classes.message} ${classes['message--success']}`;
+		style = `message message--success`;
 	}
 
 	if (props.type === 'FAIL') {
-		style = `${classes.message} ${classes['message--error']}`;
+		style = `message message--error`;
 	}
 
 	return (
