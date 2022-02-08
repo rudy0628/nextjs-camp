@@ -85,18 +85,12 @@ const CampDetailPage = props => {
 	);
 };
 
-const databaseConnect = async () => {
+export const getStaticPaths = async () => {
 	const client = await MongoClient.connect(
 		'mongodb+srv://rudy:lastcool0628@cluster0.0ro8b.mongodb.net/camps?retryWrites=true&w=majority'
 	);
 	const db = client.db();
 	const campsCollection = db.collection('camps');
-
-	return { client, campsCollection };
-};
-
-export const getStaticPaths = async () => {
-	const { client, campsCollection } = await databaseConnect();
 	const camps = await campsCollection.find({}, { _id: 1 }).toArray();
 	client.close();
 
@@ -114,7 +108,11 @@ export const getStaticProps = async context => {
 	try {
 		const campId = context.params.campId;
 
-		const { client, campsCollection } = await databaseConnect();
+		const client = await MongoClient.connect(
+			'mongodb+srv://rudy:lastcool0628@cluster0.0ro8b.mongodb.net/camps?retryWrites=true&w=majority'
+		);
+		const db = client.db();
+		const campsCollection = db.collection('camps');
 		const camp = await campsCollection.findOne({
 			_id: ObjectId(campId),
 		});
